@@ -1,0 +1,19 @@
+<a href="/dashboard">Back to Dashboard</a>
+<br/>
+
+Student Add
+
+{% if error %}
+  Error: {{ error }}
+{% endif %}
+<table>
+  <tr>
+    <td>
+      <form action="/student/add" method="post">
+      <input type="text" name="fname" placeholder="First Name"></input>
+      <input type="text" name="lname" placeholder="Last Name"></input>
+      <input type="submit" value="Add"></input>
+      </form>
+    </td>
+  </tr>
+</table>

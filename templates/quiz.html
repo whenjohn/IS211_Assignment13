@@ -1,0 +1,30 @@
+<a href="/dashboard">Back to Dashboard</a>
+<br/>
+
+Quiz Results
+<table>
+{% if quiz_results %}
+  <tr>
+    <td>Student ID</td>
+    {% if username != "Anonymous" %}
+    <td>Name</td>
+    {% endif %}
+    <td>Score</td>
+
+  </tr>
+{% for element in quiz_results %}
+<tr>
+  <td>{{ element['sid'] }}</td>
+  {% if username != "Anonymous" %}
+  <td>{{ element['fname'] }} {{ element['lname'] }}</td>
+  {% endif %}
+  <td>{{ element['score'] }}</td>
+
+</tr>
+{% endfor %}
+{% else %}
+<tr>
+  <td>No Results</td>
+</tr>
+{% endif %}
+</table>

@@ -1,0 +1,22 @@
+<a href="/dashboard">Back to Dashboard</a>
+<br/>
+
+Quiz Add
+
+{% if error %}
+  Error: {{ error }}
+{% endif %}
+<table>
+  <tr>
+    <td>
+      <form action="/quiz/add" method="post">
+      <input type="text" name="subject" placeholder="Subject"></input>
+      <input type="text" name="num_questions" placeholder="Number of questions"></input>
+      <input type="text" name="month" placeholder="Month"></input>
+      <input type="text" name="day" placeholder="Day"></input>
+      <input type="text" name="year" placeholder="Year"></input>
+      <input type="submit" value="Add"></input>
+      </form>
+    </td>
+  </tr>
+</table>

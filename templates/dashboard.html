@@ -1,0 +1,89 @@
+<html>
+  <body>
+    <a href="/">Back to Login</a>
+    <br/>
+    DASHBOARD FOR CLASS X
+
+    <br/>
+    <br/>
+
+    Hi {{ username }}
+
+    <br/>
+    <br/>
+
+    {% if student_list %}
+      List of students
+      <table>
+        <tr>
+          {% if username != "Anonymous" %}
+            <td>Actions</td>
+          {% endif %}
+          <td>ID</td>
+          <td>First Name</td>
+          <td>Last Name</td>
+          {% if username != "Anonymous" %}
+            <td>Results</td>
+          {% endif %}
+        </tr>
+        {% for student in student_list %}
+          <tr>
+            {% if username != "Anonymous" %}
+              <td><a href="/student/delete?id={{ student[0] }}">del</a></td>
+            {% endif %}
+            <td>{{ student[0] }}</td>
+            <td>{{ student[1] }}</td>
+            <td>{{ student[2] }}</td>
+            {% if username != "Anonymous" %}
+              <td><a href="/student/{{ student[0] }}">view</a></td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+
+    <br/>
+    <br/>
+
+    {% if quiz_list %}
+    List of quizes
+    <table>
+      <tr>
+        {% if username != "Anonymous" %}
+          <td>Actions</td>
+        {% endif %}
+        <td>ID</td>
+        <td>Subject</td>
+        <td>Num of Questions</td>
+        <td>Quiz Date</td>
+        <td>Results</td>
+      </tr>
+      {% for quiz in quiz_list %}
+        <tr>
+          {% if username != "Anonymous" %}
+            <td><a href="/quiz/delete?id={{ quiz[0] }}">del</a></td>
+          {% endif %}
+          <td>{{ quiz[0] }}</td>
+          <td>{{ quiz[1] }}</td>
+          <td>{{ quiz[2] }}</td>
+          <td>{{ quiz[3] }}</td>
+          <td><a href="/quiz/{{ quiz[0] }}">view</a></td>
+        </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+
+    <br/>
+    <br/>
+
+    {% if username != "Anonymous" %}
+      Class Actions:
+      <br/>
+      <a href="/student/form">Add Student</a>
+      <br/>
+      <a href="/quiz/add">Add Quiz</a>
+      <br/>
+      <a href="/results/form">Add Quiz Result</a>
+    {% endif %}
+  </body>
+</html>

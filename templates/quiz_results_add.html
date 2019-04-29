@@ -1,0 +1,68 @@
+<html>
+  <script>
+  function onChangeAction() {
+    var div_quiz_fields = document.getElementById("quiz_fields");
+    var student_id = document.getElementById("student");
+    var student_form_selection = student_id.options[student_id.selectedIndex].value;
+
+    if (student_form_selection == 0) {
+      div_quiz_fields.style.display = "none";
+    } else {
+      div_quiz_fields.style.display = "block";
+      document.getElementById("myForm").submit();
+    }
+  }
+  </script>
+
+  <body>
+  <a href="/dashboard">Back to Dashboard</a>
+  <br/>
+
+  Quiz Results
+
+  <br/>
+  {% if error %}
+    Error: {{ error }}
+  {% endif %}
+
+  {% if student_list %}
+  <form id="myForm" action="/results/add" method="post">
+    <select id='student' name='student' onchange='onChangeAction();'>
+      <option value=0>Student List</option>
+      {% for student in student_list %}
+        {% if selected %}
+            {% if selected|int() == student[0]|int() %}
+              <option value={{ student[0] }} selected>{{ student[1] }} {{ student[2] }}</option>
+            {% else %}
+              <option value={{ student[0] }}>{{ student[1] }} {{ student[2] }}</option>
+            {% endif %}
+        {% else %}
+          <option value={{ student[0] }}>{{ student[1] }} {{ student[2] }}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+
+  <div id="quiz_fields">
+    {% if quiz_list %}
+      <select name="quiz">
+        {% for quiz in quiz_list %}
+          <option value={{ quiz[0] }}>{{ quiz[1] }}</option>
+        {% endfor %}
+      </select>
+
+      <input type="text" name="score" placeholder="Score"></input>
+
+      <button name="btn" type="submit" value="btn_submit">Add</button>
+  </div>
+    {% else %}
+      <br/>
+      Student has no ungraded quizzes
+    {% endif %}
+
+  {% else %}
+    <br/>
+    No student or quizzes created
+  </form>
+  {% endif %}
+  </body>
+</html>

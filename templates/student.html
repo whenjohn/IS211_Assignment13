@@ -1,0 +1,28 @@
+<a href="/dashboard">Back to Dashboard</a>
+<br/>
+
+Student Quiz Results
+<table>
+{% if student_results %}
+  <tr>
+    <td>Action</td>
+    <td>Quiz ID</td>
+    <td>Subject</td>
+    <td>Score</td>
+    <td>Date Given</td>
+  </tr>
+{% for element in student_results %}
+<tr>
+  <td><a href="?del={{ element['qid'] }}">del</a></td>
+  <td>{{ element['qid'] }}</td>
+  <td>{{ element['subject'] }}</td>
+  <td>{{ element['score'] }}</td>
+  <td>{{ element['date_given'] }}</td>
+</tr>
+{% endfor %}
+{% else %}
+<tr>
+  <td>No Results</td>
+</tr>
+{% endif %}
+</table>
